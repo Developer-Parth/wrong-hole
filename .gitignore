@@ -1,3 +1,24 @@
+/Assets/*.cs.p1
+/Assets/*.cs.p1.meta
+/Assets/*.cs.p2
+/Assets/*.cs.p2.meta
+/Assets/TutorialInfo/
+/Assets/TutorialInfo.meta
+/Assets/Readme.asset
+/Assets/Readme.asset.meta
+/Assets.zip
+/Packages.zip
+/ProjectSettings.zip
+/Assets/MobileDependencyResolver/Editor/README.md
+/Assets/MobileDependencyResolver/Editor/README.md.meta
+/Assets/New Animation 1.anim
+/Assets/New Animation 1.anim.meta
+/Assets/Editor/mb8p*.b64
+/Assets/Editor/mb8p*.b64.meta
+/Assets/Editor/ss.p10
+/Assets/Editor/ss.p10.meta
+/Assets/Editor/ss.p11
+/Assets/Editor/ss.p11.meta
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
