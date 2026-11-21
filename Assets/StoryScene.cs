@@ -39,8 +39,8 @@ public class StoryScene : MonoBehaviour
         State = 0;
         Prompt = false;
         egg = Get("StoryEgg");
-        baby = Get("Daaminosauras");
-        mum = Get("Sukhdevosauras");
+        baby = Get("adityosauras");
+        mum = Get("parinosauras");
         for (int i = 0; i < 5; i++) items[i] = Get("Item" + i);
         if (sn == "Cave") { Transform m0 = Get("SettleMum"); Transform b0 = Get("SettleBaby"); if (m0 != null) mumGo = m0.position; if (b0 != null) babyGo = b0.position; }
         if (egg != null) eggBase = egg.position;

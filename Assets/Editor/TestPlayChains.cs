@@ -232,7 +232,7 @@ public static class TestPlayChains
                     else
                     {
                         GameObject p = GameObject.Find("Player");
-                        GameObject m = GameObject.Find("Sukhdevosauras");
+                        GameObject m = GameObject.Find("parinosauras");
                         if (p != null && m != null)
                         {
                             Vector3 d = m.transform.position - p.transform.position;

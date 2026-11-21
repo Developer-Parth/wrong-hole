@@ -75,7 +75,7 @@ public static class TestM2Flow
             keybd_event(0x57, 0x11, 2, UIntPtr.Zero);
             keybd_event(0xA0, 0x2A, 2, UIntPtr.Zero);
             GameObject p = GameObject.Find("Player");
-            GameObject b = GameObject.Find("Daaminosauras");
+            GameObject b = GameObject.Find("adityosauras");
             float dist = (p != null && b != null) ? Vector3.Distance(p.transform.position, b.transform.position) : -1f;
             bool done = false;
             if (p != null)

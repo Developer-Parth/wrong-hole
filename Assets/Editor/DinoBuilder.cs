@@ -179,8 +179,8 @@ public static class DinoBuilder
         }
         Material dinoM = Mat(new Color(0.38f, 0.48f, 0.28f));
         Material bellyM = Mat(new Color(0.62f, 0.6f, 0.42f));
-        PlaceRealDino("Sukhdevosauras", "Assets/Models/dinos/Apatosaurus/Apatosaurus.fbx", new Vector3(15, 0, 35), 5f, dinoM, bellyM);
-        BuildDino("Daaminosauras", new Vector3(10, 0, 29), 0.42f, dinoM, bellyM); GameObject.Find("Daaminosauras").SetActive(false);
+        PlaceRealDino("parinosauras", "Assets/Models/dinos/Apatosaurus/Apatosaurus.fbx", new Vector3(15, 0, 35), 5f, dinoM, bellyM);
+        BuildDino("adityosauras", new Vector3(10, 0, 29), 0.42f, dinoM, bellyM); GameObject.Find("adityosauras").SetActive(false);
         Material eggM = Mat(new Color(0.9f, 0.86f, 0.72f, 0.55f), 0.5f); MakeTransparent(eggM);
         for (int i = 0; i < 6; i++)
         {
@@ -246,7 +246,7 @@ public static class DinoBuilder
         Prim(PrimitiveType.Cylinder, "Tail2", pos + new Vector3(0, 1.5f * k, -4f * k), new Vector3(0.4f * k, 1f * k, 0.4f * k), bodyM, d.transform).transform.localRotation = Quaternion.Euler(80, 0, 0);
         for (int sp = 0; sp < 5; sp++)
             Prim(PrimitiveType.Cube, "Plate" + sp, pos + new Vector3(0, (2.9f + sp * 0.62f) * k, (0.4f + sp * 0.55f) * k), new Vector3(0.1f * k, 0.45f * k, 0.5f * k), bellyM, d.transform).transform.localRotation = Quaternion.Euler(-20, 0, 45);
-        int fst = name == "Sukhdevosauras" ? 1 : 0;
+        int fst = name == "parinosauras" ? 1 : 0;
         Texture2D ft = FaceBuilder.Face(fst, bodyM.color, new Color(0.1f, 0.08f, 0.06f), 0, new Color(0.15f, 0.4f, 0.15f), bodyM.color, false);
         FaceBuilder.Head("Head", ft, pos + new Vector3(0, 5.9f * k, 3.2f * k), new Vector3(1.1f * k, 0.85f * k, 1.4f * k), d.transform, 0f);
     }

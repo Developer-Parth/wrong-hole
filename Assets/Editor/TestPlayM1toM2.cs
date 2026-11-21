@@ -81,7 +81,7 @@ public static class TestPlayM1toM2
             if (sn == "Mission2")
             {
                 KeysUp();
-                GameObject b = GameObject.Find("Daaminosauras");
+                GameObject b = GameObject.Find("adityosauras");
                 Debug.Log("PLAYM1M2 scene=Mission2 baby=" + (b != null));
                 EditorApplication.update -= Tick;
                 stage = 9;

@@ -9,7 +9,7 @@ public class Mission2Manager : MonoBehaviour
     float loadAt = -1f;
     void Start()
     {
-        GameObject b = GameObject.Find("Sukhdevosauras");
+        GameObject b = GameObject.Find("parinosauras");
         if (b != null) baby = b.transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -61,7 +61,7 @@ public class Mission2Manager : MonoBehaviour
             b.alignment = TextAnchor.MiddleCenter;
             b.wordWrap = true;
             b.normal.textColor = new Color(1f, 0.95f, 0.6f);
-            GUI.Label(new Rect(62, cy, 900, 46), "A HUGE CREATURE - SUKHDEVOSAURAS", b);
+            GUI.Label(new Rect(62, cy, 900, 46), "A HUGE CREATURE - PARINOSAURAS", b);
             GUIStyle r = new GUIStyle(b);
             r.fontSize = 20;
             r.normal.textColor = Color.white;

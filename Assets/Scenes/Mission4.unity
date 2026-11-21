@@ -9948,7 +9948,7 @@ GameObject:
   m_Component:
   - component: {fileID: 252197674}
   m_Layer: 0
-  m_Name: Daaminosauras
+  m_Name: adityosauras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67974,7 +67974,7 @@ GameObject:
   - component: {fileID: 1710511817}
   - component: {fileID: 1710511818}
   m_Layer: 0
-  m_Name: Sukhdevosauras
+  m_Name: parinosauras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

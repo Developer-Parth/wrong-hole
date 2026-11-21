@@ -8,7 +8,7 @@ public static class Mission4Builder
         GameObject player = GameObject.Find("Player");
         Mission2Manager m2 = player.GetComponent<Mission2Manager>();
         if (m2 != null) Object.DestroyImmediate(m2);
-        GameObject mum = GameObject.Find("Sukhdevosauras");
+        GameObject mum = GameObject.Find("parinosauras");
         if (mum != null)
         {
             mum.transform.position = new Vector3(16f, 0f, 18f);

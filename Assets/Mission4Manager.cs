@@ -18,7 +18,7 @@ public class Mission4Manager : MonoBehaviour
         State = 0;
         state = 0;
         hunger = 100f;
-        GameObject m = GameObject.Find("Sukhdevosauras");
+        GameObject m = GameObject.Find("parinosauras");
         if (m != null) mum = m.transform;
         GameObject e = GameObject.Find("Egg1");
         if (e != null) egg = e.transform;
@@ -81,7 +81,7 @@ public class Mission4Manager : MonoBehaviour
                 float d = to.magnitude;
                 if (d < 3.5f)
                 {
-                    Fail("SUKHDEVOSAURAS CAUGHT YOU");
+                    Fail("PARINOSAURAS CAUGHT YOU");
                     return;
                 }
                 Vector3 dir = to.normalized;

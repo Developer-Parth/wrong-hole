@@ -21,7 +21,7 @@ public class Mission5Manager : MonoBehaviour
         State = 0;
         state = 0;
         timer = 20f;
-        GameObject m = GameObject.Find("Sukhdevosauras");
+        GameObject m = GameObject.Find("parinosauras");
         if (m != null) mum = m.transform;
         GameObject r = GameObject.Find("HideRock");
         if (r != null) rock = r.transform;

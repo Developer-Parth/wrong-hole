@@ -67,7 +67,7 @@ public static class StoryBuilder
     {
         Color none = new Color(0, 0, 0, 0);
         GameObject p = Fresh("Hatch");
-        Get("Sukhdevosauras").SetActive(false);
+        Get("parinosauras").SetActive(false);
         Material eggM = Mat(new Color(0.92f, 0.88f, 0.74f), 0.55f, new Color(0.25f, 0.2f, 0.1f, 1f));
         Material rockM = Mat(new Color(0.4f, 0.37f, 0.33f), 0.2f, none);
         for (int i = 0; i < 8; i++)
@@ -80,8 +80,8 @@ public static class StoryBuilder
         Save("Hatch", p);
 
         p = Fresh("Care");
-        Get("Sukhdevosauras").SetActive(false);
-        GameObject b = Get("Daaminosauras");
+        Get("parinosauras").SetActive(false);
+        GameObject b = Get("adityosauras");
         b.SetActive(true);
         b.transform.position = new Vector3(16f, 0f, 30f);
         Material berryM = Mat(new Color(0.8f, 0.1f, 0.2f), 0.6f, new Color(0.5f, 0.05f, 0.1f, 1f));
@@ -145,10 +145,10 @@ public static class StoryBuilder
         Prim(PrimitiveType.Sphere, "Hay", c + new Vector3(-5f, 0.15f, 9f), new Vector3(4f, 0.3f, 3f), hayM);
         for (int i = 0; i < 6; i++)
             Prim(PrimitiveType.Sphere, "Ore" + i, c + new Vector3(-9f + i * 3.4f, 0.7f, 12.2f), new Vector3(0.7f, 1.0f, 0.7f), oreM);
-        GameObject mum = Get("Sukhdevosauras");
+        GameObject mum = Get("parinosauras");
         mum.SetActive(true);
         mum.transform.position = c + new Vector3(7f, 0f, -5f);
-        GameObject baby = Get("Daaminosauras");
+        GameObject baby = Get("adityosauras");
         baby.SetActive(true);
         baby.transform.position = c + new Vector3(3f, 0f, -6f);
         new GameObject("SettleMum").transform.position = c + new Vector3(5f, 0f, 8f);

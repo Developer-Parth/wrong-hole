@@ -85,7 +85,7 @@ public static class TestM1toM2
             string sn = SceneManager.GetActiveScene().name;
             if (sn == "Mission2")
             {
-                GameObject b = GameObject.Find("Daaminosauras");
+                GameObject b = GameObject.Find("adityosauras");
                 Debug.Log("M1M2FLOW scene=" + sn + " baby=" + (b != null));
                 EditorApplication.update -= Tick;
                 stage = 9;

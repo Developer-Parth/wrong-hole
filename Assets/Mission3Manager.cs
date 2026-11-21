@@ -14,7 +14,7 @@ public class Mission3Manager : MonoBehaviour
     {
         State = 0;
         state = 0;
-        GameObject m = GameObject.Find("Sukhdevosauras");
+        GameObject m = GameObject.Find("parinosauras");
         if (m != null) mum = m.transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -85,7 +85,7 @@ public class Mission3Manager : MonoBehaviour
         {
             float el = state == 1 ? Time.time - t0 : 99f;
             int idx = el < 2.5f ? 0 : el < 5f ? 1 : el < 7.5f ? 2 : 3;
-            string msg = idx == 0 ? "THE CREATURE TURNS TOWARD YOU..." : idx == 1 ? "WAIT - SUKHDEV?!" : idx == 2 ? "IT IS SUKHDEVOSAURAS!" : "MISSION 3 COMPLETE";
+            string msg = idx == 0 ? "THE CREATURE TURNS TOWARD YOU..." : idx == 1 ? "WAIT - PARIN?!" : idx == 2 ? "IT IS PARINOSAURAS!" : "MISSION 3 COMPLETE";
             float cy = (Screen.height / k) * 0.36f;
             GUIStyle b = new GUIStyle(GUI.skin.label);
             b.fontSize = 34;
