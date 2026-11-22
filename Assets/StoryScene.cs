@@ -43,6 +43,48 @@ public class StoryScene : MonoBehaviour
         mum = Get("parinosauras");
         for (int i = 0; i < 5; i++) items[i] = Get("Item" + i);
         if (sn == "Cave") { Transform m0 = Get("SettleMum"); Transform b0 = Get("SettleBaby"); if (m0 != null) mumGo = m0.position; if (b0 != null) babyGo = b0.position; }
+        if (sn == "Cave")
+        {
+            PlayerController ppc = GetComponent<PlayerController>();
+            if (ppc != null && ppc.cameraTransform != null)
+            {
+                Shader psh = Shader.Find("Universal Render Pipeline/Lit");
+                Material wood = new Material(psh);
+                wood.color = new Color(0.45f, 0.3f, 0.15f);
+                Material steel = new Material(psh);
+                steel.color = new Color(0.55f, 0.55f, 0.6f);
+                pick = new GameObject("Pickaxe");
+                pick.transform.SetParent(ppc.cameraTransform, false);
+                pick.transform.localPosition = new Vector3(0.38f, -0.34f, 0.7f);
+                pickBase = Quaternion.Euler(20f, -15f, 10f);
+                pick.transform.localRotation = pickBase;
+                GameObject ph = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+                ph.name = "PickHandle";
+                Destroy(ph.GetComponent<Collider>());
+                ph.transform.SetParent(pick.transform, false);
+                ph.transform.localPosition = Vector3.zero;
+                ph.transform.localScale = new Vector3(0.045f, 0.3f, 0.045f);
+                ph.GetComponent<Renderer>().sharedMaterial = wood;
+                GameObject phd = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                phd.name = "PickHead";
+                Destroy(phd.GetComponent<Collider>());
+                phd.transform.SetParent(pick.transform, false);
+                phd.transform.localPosition = new Vector3(0f, 0.3f, 0f);
+                phd.transform.localScale = new Vector3(0.42f, 0.06f, 0.07f);
+                phd.GetComponent<Renderer>().sharedMaterial = steel;
+                for (int pe = -1; pe <= 1; pe += 2)
+                {
+                    GameObject ptip = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    ptip.name = "PickTip";
+                    Destroy(ptip.GetComponent<Collider>());
+                    ptip.transform.SetParent(pick.transform, false);
+                    ptip.transform.localPosition = new Vector3(0.23f * pe, 0.27f, 0f);
+                    ptip.transform.localRotation = Quaternion.Euler(0f, 0f, -35f * pe);
+                    ptip.transform.localScale = new Vector3(0.1f, 0.05f, 0.06f);
+                    ptip.GetComponent<Renderer>().sharedMaterial = steel;
+                }
+            }
+        }
         if (egg != null) eggBase = egg.position;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -102,6 +144,12 @@ public class StoryScene : MonoBehaviour
         if (sn == "Hatch") UpdateHatch();
         else if (sn == "Care") UpdateCare();
         else if (sn == "Cave") UpdateCave(kb);
+        if (pick != null)
+        {
+            float sw = (Time.time - swingAt) / 0.5f;
+            if (swingAt < 0f || sw >= 1f) pick.transform.localRotation = pickBase;
+            else pick.transform.localRotation = pickBase * Quaternion.Euler(-Mathf.Sin(sw * Mathf.PI) * 55f, 0f, 0f);
+        }
         if (heart != null)
         {
             float k = (Time.time - heartAt) / 1.5f;
@@ -248,6 +296,7 @@ public class StoryScene : MonoBehaviour
                         items[nxt].gameObject.SetActive(false);
                         got++;
                         flash = 0.5f;
+                        swingAt = Time.time;
                         if (!lit)
                         {
                             lit = true;
@@ -300,6 +349,9 @@ public class StoryScene : MonoBehaviour
 
     GameObject wayHome;
     Light wayLight;
+    GameObject pick;
+    Quaternion pickBase;
+    float swingAt = -1f;
 
     void StartNoHome()
     {

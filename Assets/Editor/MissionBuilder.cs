@@ -8,7 +8,7 @@ public static class MissionBuilder
     [MenuItem("WrongHole/Build Mission 1")]
     public static void BuildMission()
     {
-        string[] names = { "Ground", "Pit", "Wormhole", "Player", "Cheetah1", "Cheetah2", "Cheetah3", "Cheetah4", "Tree", "Trees", "GameManager", "Moon", "Stars", "Bush", "SaplingTrunk", "SaplingLeaves", "GrassTuft", "Firefly" };
+        string[] names = { "Ground", "Pit", "Wormhole", "Player", "Cheetah1", "Cheetah2", "Cheetah3", "Cheetah4", "Tree", "Trees", "GameManager", "Moon", "Stars", "Bush", "SaplingTrunk", "SaplingLeaves", "GrassTuft", "Firefly", "Bus", "EpilogueStone" };
         foreach (string n in names)
         {
             GameObject[] all = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
@@ -70,11 +70,71 @@ public static class MissionBuilder
         MakeCheetah("Cheetah3", new Vector3(25f, 1f, -5f), cheetahMat, darkMat, eyeMat);
         MakeCheetah("Cheetah4", new Vector3(-25f, 1f, -5f), cheetahMat, darkMat, eyeMat);
         BuildTrees(trunkMat, leafMat, leafMat2);
+        BuildBus();
+        BuildEpilogueStone();
         BuildForestDetail(trunkMat, leafMat3, bushMat, grassMat, fireflyMat);
         GameObject gm = new GameObject("GameManager");
         gm.AddComponent<GameManager>();
         EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
         Debug.Log("Mission 1 scene built and saved");
+    }
+
+
+    static GameObject Part(PrimitiveType t, string name, Vector3 localPos, Vector3 scale, Material m, Transform parent, Vector3 localEuler)
+    {
+        GameObject g = GameObject.CreatePrimitive(t);
+        g.name = name;
+        Object.DestroyImmediate(g.GetComponent<Collider>());
+        g.transform.SetParent(parent, false);
+        g.transform.localPosition = localPos;
+        g.transform.localScale = scale;
+        g.transform.localRotation = Quaternion.Euler(localEuler);
+        g.GetComponent<Renderer>().sharedMaterial = m;
+        return g;
+    }
+
+    static void BuildBus()
+    {
+        Material bodyM = MakeMat(new Color(0.85f, 0.6f, 0.1f), 0.25f);
+        Material glassM = MakeMat(new Color(0.5f, 0.7f, 0.85f), 0.6f);
+        Material darkM = MakeMat(new Color(0.1f, 0.1f, 0.1f), 0.1f);
+        Material lightM = MakeMat(new Color(1f, 1f, 1f), 0f);
+        lightM.EnableKeyword("_EMISSION");
+        lightM.SetColor("_EmissionColor", new Color(1f, 0.9f, 0.6f) * 2.5f);
+        GameObject bus = new GameObject("Bus");
+        bus.transform.position = new Vector3(-12.5f, 0f, -20f);
+        bus.transform.rotation = Quaternion.Euler(0f, 35f, 0f);
+        Part(PrimitiveType.Cube, "BusBody", new Vector3(0f, 1.4f, 0f), new Vector3(7f, 1.8f, 2.3f), bodyM, bus.transform, Vector3.zero);
+        Part(PrimitiveType.Cube, "BusTop", new Vector3(0f, 2.55f, 0f), new Vector3(7f, 0.6f, 2.3f), bodyM, bus.transform, Vector3.zero);
+        for (int i = 0; i < 5; i++)
+        {
+            float wx = -2.4f + i * 1.2f;
+            Part(PrimitiveType.Cube, "BusWindowL", new Vector3(wx, 1.95f, -1.16f), new Vector3(0.95f, 0.7f, 0.05f), glassM, bus.transform, Vector3.zero);
+            Part(PrimitiveType.Cube, "BusWindowR", new Vector3(wx, 1.95f, 1.16f), new Vector3(0.95f, 0.7f, 0.05f), glassM, bus.transform, Vector3.zero);
+        }
+        Part(PrimitiveType.Cube, "BusWindshield", new Vector3(3.52f, 1.9f, 0f), new Vector3(0.05f, 0.75f, 1.9f), glassM, bus.transform, Vector3.zero);
+        Part(PrimitiveType.Cube, "BusRearWindow", new Vector3(-3.52f, 1.9f, 0f), new Vector3(0.05f, 0.7f, 1.8f), glassM, bus.transform, Vector3.zero);
+        Part(PrimitiveType.Cube, "BusDoor", new Vector3(2.9f, 1.3f, 1.17f), new Vector3(0.9f, 1.5f, 0.05f), darkM, bus.transform, Vector3.zero);
+        for (int wx = -1; wx <= 1; wx += 2)
+            for (int wz = -1; wz <= 1; wz += 2)
+                Part(PrimitiveType.Cylinder, "BusWheel", new Vector3(2.3f * wx, 0.5f, 1.15f * wz), new Vector3(0.55f, 0.12f, 0.55f), darkM, bus.transform, new Vector3(90f, 0f, 0f));
+        Part(PrimitiveType.Sphere, "BusLightL", new Vector3(3.55f, 0.9f, -0.75f), Vector3.one * 0.18f, lightM, bus.transform, Vector3.zero);
+        Part(PrimitiveType.Sphere, "BusLightR", new Vector3(3.55f, 0.9f, 0.75f), Vector3.one * 0.18f, lightM, bus.transform, Vector3.zero);
+    }
+
+    static void BuildEpilogueStone()
+    {
+        Material stoneM = MakeMat(new Color(0.55f, 0.48f, 0.3f), 0.2f);
+        Material darkM = MakeMat(new Color(0.2f, 0.14f, 0.08f), 0.1f);
+        Material faceM = MakeMat(new Color(0.75f, 0.62f, 0.32f), 0.5f);
+        GameObject st = new GameObject("EpilogueStone");
+        st.transform.position = new Vector3(-9f, 0f, -18.4f);
+        st.transform.rotation = Quaternion.Euler(0f, 15f, 0f);
+        Part(PrimitiveType.Cube, "StoneBase", new Vector3(0f, 0.08f, 0f), new Vector3(1.4f, 0.16f, 1.1f), darkM, st.transform, Vector3.zero);
+        Part(PrimitiveType.Cube, "StoneBody", new Vector3(0f, 1.15f, 0f), new Vector3(1f, 2.3f, 0.7f), stoneM, st.transform, Vector3.zero);
+        Part(PrimitiveType.Cube, "StoneLid", new Vector3(0f, 1.15f, -0.42f), new Vector3(0.9f, 2.2f, 0.16f), stoneM, st.transform, Vector3.zero);
+        Part(PrimitiveType.Sphere, "StoneFace", new Vector3(0f, 1.78f, -0.52f), new Vector3(0.52f, 0.62f, 0.2f), faceM, st.transform, Vector3.zero);
+        st.SetActive(false);
     }
 
     static Material MakeMat(Color c, float smooth)

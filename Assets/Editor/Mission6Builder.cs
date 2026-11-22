@@ -195,6 +195,66 @@ public static class Mission6Builder
         Coffin(1, new Vector3(3f, 0f, 18f), gold, dark, face);
         Coffin(2, new Vector3(-3f, 0f, 36f), gold, dark, face);
         Coffin(3, new Vector3(3f, 0f, 54f), gold, dark, face);
+        Material sandFlat = Mat(new Color(0.6f, 0.5f, 0.33f), 0.1f);
+        Material deadTrunk = Mat(new Color(0.42f, 0.33f, 0.22f), 0f);
+        Material deadLeaf = Mat(new Color(0.58f, 0.5f, 0.33f), 0f);
+        Material desertRock = Mat(new Color(0.5f, 0.44f, 0.32f), 0f);
+        Prim(PrimitiveType.Cube, "DesertFloor", new Vector3(0f, -0.5f, -50f), new Vector3(70f, 1f, 90f), sand, null);
+        Prim(PrimitiveType.Cube, "PyramidStep1", new Vector3(0f, 3f, -9.5f), new Vector3(46f, 7f, 9f), sandFlat, null);
+        Prim(PrimitiveType.Cube, "PyramidStep2", new Vector3(0f, 9f, -9.5f), new Vector3(36f, 6f, 8f), sandFlat, null);
+        Prim(PrimitiveType.Cube, "PyramidStep3", new Vector3(0f, 14f, -9.5f), new Vector3(26f, 5f, 7f), sandFlat, null);
+        Material gold2 = Mat(new Color(0.8f, 0.62f, 0.25f), 0.55f);
+        Prim(PrimitiveType.Cube, "PyramidDoor", new Vector3(0f, 2.2f, -5.2f), new Vector3(5f, 4.4f, 0.6f), gold2, null);
+        System.Random drng = new System.Random(42);
+        for (int i = 0; i < 8; i++)
+        {
+            float tx = (float)(drng.NextDouble() * 44.0 - 22.0);
+            float tz = (float)(drng.NextDouble() * 32.0 - 48.0);
+            float tilt = (float)(drng.NextDouble() * 14.0 - 7.0);
+            GameObject dt = Prim(PrimitiveType.Cylinder, "DeadTreeTrunk", new Vector3(tx, 2.4f, tz), new Vector3(0.5f, 2.4f, 0.5f), deadTrunk, null);
+            dt.transform.rotation = Quaternion.Euler(tilt, 0f, tilt * 0.6f);
+            Prim(PrimitiveType.Sphere, "DeadTreeTop", new Vector3(tx, 6f, tz), new Vector3(3.4f, 2.8f, 3.4f), deadLeaf, null);
+            Prim(PrimitiveType.Sphere, "DeadTreeTop2", new Vector3(tx, 8f, tz), Vector3.one * 2.2f, deadLeaf, null);
+        }
+        for (int i = 0; i < 9; i++)
+        {
+            float bx = (float)(drng.NextDouble() * 44.0 - 22.0);
+            float bz = (float)(drng.NextDouble() * 34.0 - 50.0);
+            float bs = 0.7f + (float)drng.NextDouble() * 0.8f;
+            Prim(PrimitiveType.Sphere, "DeadBush", new Vector3(bx, bs * 0.25f, bz), new Vector3(bs * 1.6f, bs * 0.55f, bs * 1.6f), deadLeaf, null);
+        }
+        for (int i = 0; i < 7; i++)
+        {
+            float rx = (float)(drng.NextDouble() * 40.0 - 20.0);
+            float rz = (float)(drng.NextDouble() * 30.0 - 48.0);
+            float rs = 0.6f + (float)drng.NextDouble() * 1.2f;
+            Prim(PrimitiveType.Sphere, "DesertRock", new Vector3(rx, rs * 0.2f, rz), new Vector3(rs * 1.5f, rs * 0.7f, rs * 1.2f), desertRock, null);
+        }
+        Material moonM = Mat(new Color(1f, 1f, 1f), 0f);
+        moonM.EnableKeyword("_EMISSION");
+        moonM.SetColor("_EmissionColor", new Color(0.9f, 0.95f, 1f) * 2.2f);
+        GameObject dmoon = Prim(PrimitiveType.Sphere, "DesertMoon", new Vector3(20f, 42f, 70f), Vector3.one * 9f, moonM, null);
+        Object.DestroyImmediate(dmoon.GetComponent<Collider>());
+        Material shaftM = Mat(new Color(0.05f, 0.045f, 0.06f), 0f);
+        Prim(PrimitiveType.Cube, "ShaftW1", new Vector3(3.5f, -51f, 40f), new Vector3(1f, 102f, 8f), shaftM, null);
+        Prim(PrimitiveType.Cube, "ShaftW2", new Vector3(-3.5f, -51f, 40f), new Vector3(1f, 102f, 8f), shaftM, null);
+        Prim(PrimitiveType.Cube, "ShaftW3", new Vector3(0f, -51f, 43.5f), new Vector3(8f, 102f, 1f), shaftM, null);
+        Prim(PrimitiveType.Cube, "ShaftW4", new Vector3(0f, -51f, 36.5f), new Vector3(8f, 102f, 1f), shaftM, null);
+        Prim(PrimitiveType.Cube, "ShaftBottom", new Vector3(0f, -102.5f, 40f), new Vector3(8f, 1f, 8f), shaftM, null);
+        Material shardM = Mat(new Color(0.28f, 0.24f, 0.2f), 0f);
+        Material glowShardM = Mat(new Color(0.95f, 0.75f, 0.2f), 0.6f);
+        glowShardM.EnableKeyword("_EMISSION");
+        glowShardM.SetColor("_EmissionColor", new Color(1.2f, 0.85f, 0.25f) * 1.6f);
+        System.Random srng = new System.Random(11);
+        for (int i = 0; i < 26; i++)
+        {
+            float sx = (float)(srng.NextDouble() * 4.4 - 2.2);
+            float sz2 = 40f + (float)(srng.NextDouble() * 4.4 - 2.2);
+            float sy = -8f - (float)srng.NextDouble() * 86f;
+            float ss = 0.2f + (float)srng.NextDouble() * 0.45f;
+            GameObject sh = Prim(PrimitiveType.Cube, "FallShard", new Vector3(sx, sy, sz2), Vector3.one * ss, i % 5 == 0 ? glowShardM : shardM, null);
+            sh.transform.rotation = Quaternion.Euler((float)srng.NextDouble() * 90f, (float)srng.NextDouble() * 90f, 0f);
+        }
         GameObject player = new GameObject("Player");
         player.transform.position = new Vector3(0, 1.2f, 0);
         player.transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 1));
@@ -208,6 +268,12 @@ public static class Mission6Builder
         cam.clearFlags = CameraClearFlags.SolidColor;
         cam.backgroundColor = new Color(0.02f, 0.015f, 0.03f);
         camGO.AddComponent<AudioListener>();
+        Material hoodM = Mat(new Color(0.2f, 0.45f, 0.9f), 0.3f);
+        GameObject pbody = Prim(PrimitiveType.Capsule, "PlayerBody", new Vector3(0f, 2.1f, 0f), new Vector3(0.55f, 0.7f, 0.4f), hoodM, player.transform);
+        Object.DestroyImmediate(pbody.GetComponent<Collider>());
+        Color psk = new Color(0.8f, 0.64f, 0.47f);
+        Texture2D pft = FaceBuilder.Face(0, psk, new Color(0.08f, 0.06f, 0.05f), 2, new Color(0.3f, 0.18f, 0.1f), psk);
+        FaceBuilder.Head("PlayerHead", pft, new Vector3(0f, 2.6f, 0f), new Vector3(0.42f, 0.46f, 0.42f), player.transform, 0f);
         PlayerController pc = player.AddComponent<PlayerController>();
         pc.cameraTransform = camGO.transform;
         player.AddComponent<Mission6Manager>();

@@ -21,6 +21,12 @@ public class CheetahAI : MonoBehaviour
     void Update()
     {
         if (player == null || GameManager.MissionOver || GameManager.Epilogue) return;
+        if (GameManager.Frozen)
+        {
+            yVelocity -= 20f * Time.deltaTime;
+            controller.Move(Vector3.up * yVelocity * Time.deltaTime);
+            return;
+        }
         if (Time.time - startTime < reactionDelay)
         {
             yVelocity -= 20f * Time.deltaTime;
