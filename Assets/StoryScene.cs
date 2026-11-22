@@ -209,7 +209,7 @@ public class StoryScene : MonoBehaviour
         }
         else if (State == 1)
         {
-            if (Time.time - tAt > 4f) { State = 2; Next("Cave"); }
+            if (Time.time - tAt > 9f) { State = 2; Next("Cave"); }
         }
     }
 
@@ -358,6 +358,7 @@ public class StoryScene : MonoBehaviour
             s.fontSize = 30;
             GUI.Label(new Rect(62, (Screen.height / k) * 0.45f, 900, 40), "THE WAY HOME IS GONE", s);
         }
+if (sn == "Care" && State == 1) { s.fontSize = 24; GUI.Label(new Rect(62, (Screen.height / k) * 0.4f, 900, 70), "AARYAN: now I'm stuck here forever, I have to keep this as a happy family,\nand give them a safe place to live", s); }     
         if (Prompt)
         {
             s.fontSize = 26;

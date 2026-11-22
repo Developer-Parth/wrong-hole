@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
             sub.fontSize = 20;
             GUI.Label(new Rect(62, cy + 4, 900, 30), won ? "Entering the dinosaur era..." : "Press R to restart", sub);
         }
+        { float tt = Time.timeSinceLevelLoad; if (tt < 3f) { GUI.color = Color.black; GUI.DrawTexture(new Rect(0, 0, 1024, Screen.height / k), Texture2D.whiteTexture); GUI.color = Color.white; GUIStyle o = new GUIStyle(GUI.skin.label); o.alignment = TextAnchor.MiddleCenter; o.fontSize = 40; GUI.Label(new Rect(0, 238, 1024, 60), "Escape from cheetahs", o); o.fontSize = 30; GUI.Label(new Rect(0, 310, 1024, 50), Mathf.CeilToInt(3f - tt).ToString(), o); } }
         GUI.matrix = old;
     }
 }

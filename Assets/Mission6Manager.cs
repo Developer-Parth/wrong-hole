@@ -58,6 +58,7 @@ public class Mission6Manager : MonoBehaviour
 
     void Update()
     {
+    if (Time.timeSinceLevelLoad < 13f) return;
         State = state;
         if (flash > 0f) flash -= Time.deltaTime * 1.6f;
         for (int i = 0; i < 3; i++)
@@ -185,6 +186,7 @@ public class Mission6Manager : MonoBehaviour
             GUI.color = new Color(1f, 1f, 1f, Mathf.Clamp01(flash));
             GUI.DrawTexture(new Rect(0, 0, 1024, Screen.height / k), Texture2D.whiteTexture);
             GUI.color = Color.white;
+            { float tt = Time.timeSinceLevelLoad; string card = tt < 3f ? "some years later" : tt < 5.5f ? "Dead!" : tt < 8.5f ? "millions of years later" : tt < 13f ? "For your photographs you are visiting egypt mummy's coffins" : null; if (card != null) { GUI.color = Color.black; GUI.DrawTexture(new Rect(0, 0, 1024, Screen.height / k), Texture2D.whiteTexture); GUI.color = Color.white; s.fontSize = 34; GUI.Label(new Rect(0, 258, 1024, 60), card, s); } }
         }
         GUI.matrix = old;
     }
